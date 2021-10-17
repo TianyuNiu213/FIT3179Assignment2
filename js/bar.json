@@ -2,14 +2,14 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "data": {
-    "url": "usa_earthquake.csv"
+    "url": "https://raw.githubusercontent.com/TianyuNiu213/FIT3179Assignment2/main/data/usa-earthquake.csv"
   },
 
   "hconcat": [
     {
       "title": {
         "text": "Number of different Mag types",
-        "subtitle": "click to select   scatter plot",
+        "subtitle": "（click to select scatter plot）",
         "align": "center",
         "fontSize": 18
       },
@@ -43,7 +43,7 @@
       "layer": [
         {
           "title": {
-            "text": "mag vs depth",
+            "text": "Mag vs Depth",
             "align": "center",
             "fontSize": 20
           },
@@ -69,14 +69,24 @@
               "legend": { "title": "Selected mag Count" },
               "scale": {
                 "type": "linear",
-                "range": [400, 2000]
+                "range": [50, 100]
               }
             },
             "tooltip": [
               {
                 "field": "depth",
+                "type": "quantitative"          
+              },
+              {
+                "field": "mag",
                 "type": "quantitative"
+              },
+              {
+                "field": "magType",
+                "type": "nominal"
               }
+              
+              
             ],
             "fill": {
               "field": "magType",
