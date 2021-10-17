@@ -1,0 +1,134 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1000,
+  "height": 800,
+  "title": {
+    "text": "Geographical distribution of earthquakes in the United States (2011-2021)",
+    "align": "center",
+    "fontSize": 25
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "states-10m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "projection": {
+        "type": "albersUsa"
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#EEEEEE",
+        "stroke": "white"
+      }
+    },
+    {
+      "data": {
+        "url": "usa_earthquake.csv"
+      },
+      "params": [
+        {
+          "name": "magType_select",
+          "select": { "type": "point", "fields": ["magType"] },
+          "bind": {
+            "input": "select",
+            "options": [
+              null,
+              "mb",
+              "md",
+              "mh",
+              "ml",
+              "mlg",
+              "mlr",
+              "mw",
+              "mwb",
+              "mwc",
+              "mwr",
+              "mww"
+            ],
+            "labels": [
+              "Show All",
+              "mb",
+              "md",
+              "mh",
+              "ml",
+              "mlg",
+              "mlr",
+              "mw",
+              "mwb",
+              "mwc",
+              "mwr",
+              "mww"
+            ]
+          }
+        },
+
+        {
+          "name": "mag_range",
+          "select": { "type": "interval", "fields": ["mag"] },
+          "bind": {
+            "input": "range",
+            "min": 0,
+            "max": 10,
+            "step": 0.2
+          }
+        },
+        {
+          "name": "grid",
+          "select": "interval",
+          "bind": "scales"
+        }
+      ],
+
+      "transform": [
+        { "filter": { "param": "magType_select" } },
+        { "filter": { "param": "mag_range" } },
+        {
+          "calculate": "1",
+          "as": "Number_of_Records"
+        }
+      ],
+      "projection": {
+        "type": "albersUsa"
+      },
+      "mark": "circle",
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "aggregate": "mean",
+          "field": "mag",
+          "type": "quantitative"
+        },
+        "fill": {
+          "value": "#D72323"
+        },
+        "stroke": {
+          "value": "white"
+        },
+        "strokeWidth": {
+          "value": 0.5
+        },
+        "fillOpacity": {
+          "value": 0.4
+        },
+
+        "tooltip": [
+          {
+            "field": "mag",
+            "type": "quantitative"
+          }
+        ]
+      }
+    }
+  ]
+}

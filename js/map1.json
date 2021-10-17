@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 765,
+  "height": 600,
+  "title": {
+    "text": [
+      "Earthquakes of Magnitude Larger Than 4",
+      "in the USA From 2011 to 2021"
+    ],
+    "fontSize": 16,
+    "baseline": "middle",
+    "lineHeight": 20
+  },
+  "params": [
+    {
+      "name": "mag_selection",
+      "value": null,
+      "bind": {
+        "input": "range",
+        "min": 4,
+        "max": 7,
+        "step": 0.5,
+        "name": "Magnitude Larger than 4: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/TianyuNiu213/FIT3179Assignment2/main/js/counties-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "projection": {
+        "type": "albersUsa"
+      },
+
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white",
+        "tooltip": true
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/TianyuNiu213/FIT3179Assignment2/main/data/usa-earthquake.csv"
+      },
+
+      "transform": [{ "filter": "datum.mag>=mag_selection" }],
+      "mark": {
+        "type": "circle",
+        "tooltip": { "content": "data" },
+        "size": { "expr": "size" }
+      },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude": { "field": "latitude", "type": "quantitative" },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "temporal",
+            "timeUnit": "year",
+            "title": "Year"
+          },
+          { "field": "place", "type": "nominal", "title": "Place" },
+          {
+            "field": "mag",
+            "type": "quantitative",
+            "title": "Magnitude",
+            "format": ","
+          },
+          { "field": "depth", "type": "quantitative", "title": "Depth" }
+        ],
+        "color": {
+          "field": "mag",
+          "type": "quantitative",
+          "title": "Magnitude",
+          "scale": {
+            "type": "threshold",
+            "domain": [5, 6],
+            "range": ["#fff27a", "#FF8C00", "#de2d26"]
+          }
+        },
+        "size": {
+          "field": "depth",
+          "type": "quantitative",
+          "title": "Depth",
+          "legend": { "clipHeight": 30 },
+          "scale": {
+            "type": "linear",
+            "range": [100, 300]
+          }
+        }
+      }
+    }
+  ],
+  "config": {}
+}

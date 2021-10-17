@@ -1,0 +1,46 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 320,
+  "title":{
+      "text":["Earthquakes of magnitude 4-7 in the USA","for each year from 2011 to 2021"],
+      "fontSize":16,
+      "baseline":"middle",
+      "lineHeight":20
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/TianyuNiu213/FIT3179Assignment2/main/data/usa-earthquake.csv"
+  },"params": [
+    {
+      "name": "mag_selection",
+      "value":null,
+      "bind": {
+        "input": "range",
+      "min":4,
+      "max":7,
+      "step":0.5,
+      "name":"Magnitude Larger Than 4: "
+      }
+    }
+  ],
+  "transform": [{"filter":"datum.mag>=mag_selection"
+    }],
+  "encoding": {
+    "x": {"field": "year", "type": "ordinal","timeUnit":"year","title":"Year"},
+    "y": {
+      "aggregate":"count",
+      "field": "year",
+      "sort":"ascending",
+      "title": "Number of earthquakes"
+    },
+    "color": {"value":"blue"},
+    "tooltip": [
+      {"aggregate":"count","field": "year", "title": "Counts of earthquakes","format":","},{"field":"year","type": "ordinal","timeUnit":"year","title":"Year"}
+    ]
+  },
+  "layer": [
+  {"mark": {"type": "line","point":true}
+  }
+
+  ]
+}
