@@ -1,4 +1,4 @@
-time,year,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,statID,loCAtionSource,magSource
+time,year,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,statID,locationSource,magSource
 2021-10-03T01:39:18.557Z,2021,31.7055964,-104.0238823,8.136791992,4,ml,23,68,0.027343481,0.1,TX,TX2021tiop,2021-10-04T14:06:20.066Z,"40 km W of Mentone, Texas",earthquake,0.696121521,0.592458153,0.2,13,reviEWed,TX,TX
 2021-10-02T23:47:42.725Z,2021,44.2742,-115.0271,12.41,4,mwr,,66,0.838,0.67,ID,ID6000fr7b,2021-10-12T17:59:58.722Z,"9 km NW of Stanley, Idaho",earthquake,3.3,10.6,0.032,91,reviEWed,ID,ID
 2021-09-23T07:52:06.555Z,2021,31.59306805,-104.0034225,8.805200195,4.3,ml,28,54,0.07254039,0.2,TX,TX2021sqTX,2021-10-17T12:12:01.674Z,"36 km NVW of Toyah, Texas",earthquake,0.891920488,0.903369239,0.2,14,reviEWed,TX,TX
